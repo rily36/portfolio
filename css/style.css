@@ -1,0 +1,481 @@
++@charset "UTF-8";
+
+/* 共通部分
+------------------------------- */
+html {
+    font-size: 100%; /* ブラウザのデフォルトフォントサイズを基準にする */
+}
+body{
+  font-family: "Cormorant Garamond", serif;
+  font-optical-sizing: auto;
+  font-weight: weight;
+  font-style: normal;
+	
+    line-height: 1.7; /* 行間を文字の1.7倍に設定（読みやすさ向上） */
+    color: #FFFFFF; /* 文字色を暗い茶色に設定 */
+	background-color:  #C39DE0; /* ページの背景色の設定 */
+}
+a {
+    text-decoration: none; /* リンクの下線を削除 */
+}
+img {
+    max-width: 100%; /* 画像の最大幅を親要素の100%に制限（レスポンシブ対応）
+                        max-widthとwidthの違い：
+                        width: 100% → 必ず100%の幅になる（画像が小さくても引き伸ばされる）
+                        max-width: 100% → 最大100%まで（画像が小さい場合は元のサイズのまま） */
+}
+
+/* レイアウト */
+.wrapper {
+    max-width: 1120px; /* コンテンツの最大幅を1120pxに制限
+                          max-widthとwidthの違い：
+                          width: 1120px → 画面が狭くても必ず1120px（はみ出る可能性）
+                          max-width: 1120px → 画面が1120px以下の時は画面幅に合わせる */
+    margin: auto; /* 左右のマージンを自動調整（中央揃え）
+                     margin: auto の仕組み：
+                     左右の余白を自動で等分することで要素を中央に配置 */
+    padding: 0 1.5rem; /* 左右に1.5remの余白を追加
+                          paddingとmarginの違い：
+                          padding → 要素の内側の余白（背景色も適用される）
+                          margin → 要素の外側の余白（背景色は適用されない） */
+}
+.align-center {
+    text-align: center; /* テキストを中央揃えにする */
+}
+
+/* 見出し */
+.font-english {
+ font-family: "Cormorant Garamond", serif;
+  font-optical-sizing: auto;
+  font-weight: <weight>;
+  font-style: normal;
+	color: #FFFFFF;
+}
+.page-title,
+.heading-large,
+.heading-medium {
+    font-size: 3rem; /* フォントサイズを3rem（約48px）に設定 */
+    text-align: center; /* テキストを中央揃えにする */
+}
+.page-title {
+    margin-top: 2rem; /* 上部に2remの余白を追加 */
+    line-height: 1.4; /* 行間を文字の1.4倍に設定 */
+}
+.heading-large {
+    margin-bottom: 1rem; /* 下部に1remの余白を追加 */
+}
+
+/* ボタン */
+.btn {
+    display: inline-block; /* インラインブロック要素として表示（横並び可能） */
+    font-size: 1.5rem; /* フォントサイズを1.5rem（約24px）に設定 */
+    background-color: #725E8C; /* 背景色を水色に設定 */
+    color: #fff; /* 文字色を白に設定 */
+    border-radius: 8px; /* 角を8pxの丸みを付ける */
+    padding: .75rem 1.5rem; /* 内側の余白を上下0.75rem、左右1.5remに設定
+                               paddingの書き方パターン：
+                               padding: 10px; → 上下左右すべて10px
+                               padding: 10px 20px; → 上下10px、左右20px
+                               padding: 10px 20px 30px; → 上10px、左右20px、下30px
+                               padding: 10px 20px 30px 40px; → 上10px、右20px、下30px、左40px（時計回り） */
+	bottom:0px
+    transition: .5s; /* 全てのプロパティ変更に0.5秒のアニメーション効果を追加
+                        transitionの詳細：
+                        transition: all 0.5s; と同じ意味
+                        色、サイズ、位置などの変化が滑らかに0.5秒かけて変わる */
+}
+.btn:hover {
+	background-color: #9F7FE0; /* ホバー時（マウスを乗せた時）の背景色を濃い水色に変更 */
+	transform: translateY(-2px); /* ホバー時に要素を2px上に移動 */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* ホバー時に影を追加
+                                                  box-shadowの書き方：
+                                                  box-shadow: 右への移動 下への移動 ぼかし 色;
+                                                  0 2px 4px → 右0px、下2px、ぼかし4px
+                                                  rgba(0, 0, 0, 0.1) → 黒色で透明度10% */
+}
+
+/* iframe */
+iframe {
+    width: 100%; /* iframe（埋め込み要素）の幅を100%に設定 */
+}
+
+/* ヘッダー
+------------------------------- */
+.page-header {
+    padding-top: .5rem; /* 上部に0.5remの内側余白を追加 */
+}
+.logo {
+    width: 210px; /* ロゴの幅を210pxに設定 */
+}
+.main-nav {
+    display: flex; /* フレックスボックスレイアウトを使用
+                      displayプロパティの主な値：
+                      block → 縦に並ぶ（divのデフォルト）
+                      inline → 横に並ぶ（spanのデフォルト）
+                      inline-block → 横に並ぶ + 幅・高さ指定可能
+                      flex → 柔軟なレイアウト（子要素を自由に配置） */
+    justify-content: center; /* 子要素を中央揃えにする
+                                justify-contentの値：
+                                flex-start → 左揃え（デフォルト）
+                                center → 中央揃え
+                                flex-end → 右揃え
+                                space-between → 両端揃え（要素間に等間隔）
+                                space-around → 各要素の周りに等間隔 */
+    gap: 2.5rem; /* 子要素間に2.5remの間隔を設定
+                     gapとmarginの違い：
+                     gap → フレックスボックスやグリッド専用の間隔指定
+                     margin → 個別の要素に余白を追加
+                     gapの方が簡単で一括設定可能 */
+    font-size: 1.5rem; /* フォントサイズを1.5rem（約24px）に設定 */
+    list-style: none; /* リストの点や番号を削除 */
+}
+.main-nav a {
+	color: #FFFFFF; /* リンクの文字色を暗い茶色に設定 */
+	text-shadow: 0 3px 3px rgba(0, 0, 0, 0.2); /* 文字に影を追加
+	                                              text-shadowの書き方：
+	                                              text-shadow: 右への移動 下への移動 ぼかし 色;
+	                                              0 3px 3px → 右0px、下3px、ぼかし3px
+	                                              box-shadowとの違い：文字専用の影効果 */
+}
+.main-nav a:hover {
+	display:block; /* ホバー時にブロック要素として表示 */
+	color: #C39DE0; /* ホバー時の文字色を水色に変更 */
+	transition: .5s; /* 0.5秒のトランジション（変化）効果を設定 */
+	transform: translateY(-2px); /* ホバー時に要素を2px上に移動 */
+}
+
+/* ヘッダーカバー画像
+------------------------------- */
+.cover {
+    background-size: cover; /* 背景画像をコンテナ全体を覆うように調整
+                               background-sizeの値：
+                               cover → 縦横比を保ったまま全体を覆う（一部切れる場合あり）
+                               contain → 縦横比を保ったまま全体を表示（余白ができる場合あり）
+                               100% 100% → 縦横比を無視して全体に引き伸ばし */
+    background-position: center bottom; /* 背景画像の位置を中央下に設定
+                                        background-positionの指定方法：
+                                        キーワード → top, center, bottom / left, center, right
+                                        パーセント → 50% 100%（中央下と同じ）
+                                        ピクセル → 10px 20px（左から10px、上から20px） */
+    height: 800px; /* 高さを800pxに設定 */
+}
+.sub-cover {
+    background-size: cover; /* 背景画像をコンテナ全体を覆うように調整 */
+    background-position: center bottom; /* 背景画像の位置を中央下に設定 */
+    height: 528px; /* 高さを528pxに設定 */
+    margin-bottom: 4rem; /* 下部に4remの余白を追加 */
+}
+
+/* HOME
+------------------------------- */
+.cover-home {
+    background-image: url("../images/cover-home-s.png"); /* ホームページのカバー画像を設定 */
+}
+.about {
+    max-width: 736px; /* 最大幅を736pxに制限 */
+    padding: 0 1.5rem; /* 左右に1.5remの内側余白を追加 */
+    margin: 3rem auto 0; /* 上に3rem、左右は自動調整（中央揃え）、下は0の余白を設定 */
+}
+.about p {
+    margin-bottom: 3rem; /* 段落の下部に3remの余白を追加 */
+}
+
+/* NEWS
+------------------------------- */
+.cover-news {
+    background-image: url("../news/images/cover-news-l.png"); /* ニュースページのカバー画像を設定 */
+}
+
+/* 記事部分 */
+.post {
+    margin-bottom: 3rem; /* 記事の下部に3remの余白を追加 */
+}
+.post-title {
+    font-weight: normal; /* フォントの太さを標準に設定 */
+    margin-bottom: 1.25rem; /* 下部に1.25remの余白を追加 */
+}
+.post-info {
+    display: flex; /* フレックスボックスレイアウトを使用 */
+    gap: 1rem; /* 子要素間に1remの間隔を設定 */
+    margin-bottom: 2rem; /* 下部に2remの余白を追加 */
+}
+.post-cat {
+    display: flex; /* フレックスボックスレイアウトを使用 */
+    gap: .5rem; /* 子要素間に0.5remの間隔を設定 */
+    list-style: none; /* リストの点や番号を削除 */
+}
+.post-cat a {
+    color: ##FFFFFF; /* リンクの文字色を暗い茶色に設定 */
+    background-color: #B5B5B5; /* 背景色をベージュに設定 */
+    border-radius: 8px; /* 角を8pxの丸みを付ける */
+    font-size: .875rem; /* フォントサイズを0.875rem（約14px）に設定 */
+    padding: .5rem .75rem; /* 内側の余白を上下0.5rem、ｓ左右0.75remに設定 */
+}
+.post-cat a:hover {
+    background-color: #c9c2bc; /* ホバー時の背景色を薄い茶色に変更 */
+}
+.post-date {
+    font-size: .875rem; /* フォントサイズを0.875rem（約14px）に設定 */
+}
+.post-thumbnail {
+    border-radius: 16px; /* 角を16pxの丸みを付ける */
+    margin-bottom: 1.5rem; /* 下部に1.5remの余白を追加 */
+}
+.post p {
+    margin-bottom: 1.5rem; /* 段落の下部に1.5remの余白を追加 */
+    line-height: 2; /* 行間を文字の2倍に設定 */
+}
+
+/* サイドバー */
+.side-menu {
+    list-style: none; /* リストの点や番号を削除 */
+    text-align: center; /* テキストを中央揃えにする */
+    margin-bottom: 4rem; /* 下部に4remの余白を追加 */
+}
+.side-menu li {
+    border-bottom: 1px solid #FFFFFF; /* 各項目の下に1pxの実線の境界線を追加 */
+}
+.side-menu a {
+    color: #FFFFFF; /* リンクの文字色を暗い茶色に設定 */
+    display: block; /* ブロック要素として表示（全幅でクリック可能） */
+    padding: 1rem; /* 内側に1remの余白を追加 */
+}
+
+
+/* MENU
+------------------------------- */
+.cover-menu {
+    background-image: url("../images/cover-home-l.png"); /* メニューページのカバー画像を設定 */
+}
+.grid {
+    display: grid; /* グリッドレイアウトを使用 */
+    gap: 2rem 1.5rem; /* 行間は2rem、列間は1.5remの間隔を設定 */
+    grid-template-columns: repeat(2, 1fr); /* 2列のグリッドを作成（各列は等幅） */
+    text-align: center; /* テキストを中央揃えにする */
+}
+.item img {
+    aspect-ratio: 3/4; /* 画像のアスペクト比を1:1（正方形）に設定
+                          aspect-ratioの例：
+                          1/1 → 正方形
+                          16/9 → 横長長方形（YouTubeなど）
+                          3/4 → 縦長長方形（インスタグラムの縦投稿など） */
+    object-fit: cover; /* 画像を枠に合わせて切り抜き表示
+                          object-fitの値：
+                          cover → 縦横比を保ったまま枠を埋める（一部切れる場合あり）
+                          contain → 縦横比を保ったまま全体を表示（余白ができる場合あり）
+                          fill → 縦横比を無視して枠に合わせる（画像が歪む場合あり） */
+    border-radius: 16px; /* 角を16pxの丸みを付ける */
+}
+.item p {
+    font-size: .875rem; /* フォントサイズを0.875rem（約14px）に設定 */
+}
+
+/* CONTACT
+------------------------------- */
+.cover-contact {
+    background-image: url(""); /* コンタクトページのカバー画像を設定 */
+}
+
+/* 店舗情報 */
+.location {
+    margin-bottom: 3.5rem; /* 下部に3.5remの余白を追加 */
+}
+.location-info {
+    margin-bottom: 2rem; /* 下部に2remの余白を追加 */
+}
+.location-info .info {
+    padding: 0; /* 内側余白を0に設定 */
+}
+
+/* お問い合わせ */
+.email {
+    max-width: 916px; /* 最大幅を916pxに制限 */
+    background-color: #C39DE0; /* 背景色をベージュに設定 */
+    border-radius: 48px; /* 角を48pxの丸みを付ける */
+    padding: 1.5rem 2.5rem 2.5rem; /* 内側の余白を上1.5rem、左右2.5rem、下2.5remに設定 */
+    margin: 0 auto 2rem; /* 上0、左右自動調整（中央揃え）、下2remの余白を設定 */
+}
+.email p {
+    margin: 1rem 0 2rem; /* 上1rem、左右0、下2remの余白を設定 */
+}
+
+/* SNS */
+.sns-item {
+    margin-bottom: 2rem; /* 下部に2remの余白を追加 */
+}
+.sns-item .heading-medium {
+    margin-bottom: .5rem; /* 下部に0.5remの余白を追加 */
+}
+.sns-youtube {
+    aspect-ratio: 16/9; /* YouTubeの一般的なアスペクト比16:9に設定 */
+}
+.sns-youtube iframe {
+    height: 100%; /* 高さを100%に設定 */
+}
+
+/* フッター
+------------------------------- */
+.page-footer {
+    background-image: url("../"); /* フッターの背景画像を設定 */
+    background-size: cover; /* 背景画像をコンテナ全体を覆うように調整 */
+    background-position: center; /* 背景画像の位置を中央に設定 */
+    padding-top: 12rem; /* 上部に12remの内側余白を追加 */
+}
+.info {
+    width: 100%; /* 幅を100%に設定 */
+    max-width: 544px; /* 最大幅を544pxに制限 */
+    margin: auto; /* 左右のマージンを自動調整（中央揃え） */
+    padding: 0 1.5rem; /* 左右に1.5remの内側余白を追加 */
+    border-spacing: 0; /* テーブルのセル間隔を0に設定
+                          border-spacingとborder-collapseの違い：
+                          border-spacing → セル間の空白を調整
+                          border-collapse → セルの境界線を統合するかどうか
+                          border-collapse: collapse とセットで使うことが多い */
+}
+.info th,
+.info td {
+    border-bottom: 1px solid #c9c2bc; /* 各セルの下に1pxの実線の境界線を追加 */
+}
+.info th {
+    text-align: left; /* テーブルヘッダーのテキストを左揃えにする */
+    font-weight: normal; /* フォントの太さを標準に設定 */
+    padding: 1rem; /* 内側に1remの余白を追加 */
+}
+.info td {
+    padding: 1rem 0; /* 内側の余白を上下1rem、左右0に設定 */
+}
+.copyright {
+    background-color:#6C6C6C; /* 背景色を暗い茶色に設定 */
+    text-align: center; /* テキストを中央揃えにする */
+    padding: 2rem 0; /* 内側の余白を上下2rem、左右0に設定 */
+    margin-top: 6rem; /* 上部に6remの余白を追加 */
+    color: #fff; /* 文字色を白に設定 */
+}
+
+/* デスクトップ版（画面幅800px以上の場合に適用）
+------------------------------- */
+@media (min-width: 800px) {
+    /* 見出し */
+    .page-title {
+        font-size: 5rem; /* ページタイトルのフォントサイズを5rem（約80px）に変更 */
+    }
+    .heading-large {
+        font-size: 4rem; /* 大見出しのフォントサイズを4rem（約64px）に変更 */
+    }
+    .post-title {
+        font-size: 2rem; /* 記事タイトルのフォントサイズを2rem（約32px）に変更 */
+    }
+
+    /* ヘッダー */
+    .page-header {
+        display: flex; /* フレックスボックスレイアウトを使用 */
+        justify-content: space-between; /* 子要素を両端に配置
+                                     space-betweenの仕組み：
+                                     最初の要素を左端、最後の要素を右端に配置
+                                     残りの要素は間に等間隔で配置される */
+        padding-top: 1.5rem; /* 上部の内側余白を1.5remに変更 */
+    }
+    .main-nav {
+        font-size: 2rem; /* ナビゲーションのフォントサイズを2rem（約32px）に変更 */
+    }
+
+    /* ヘッダーカバー画像 */
+    .sub-cover {
+        height: 400px; /* サブカバーの高さを400pxに変更 */
+        margin-bottom: 6rem; /* 下部の余白を6remに変更 */
+    }
+
+    /* HOME */
+    .cover-home {
+        background-image: url(../images/cover-home-l.png); /* ホームページのカバー画像を大きいサイズに変更 */
+    }
+    .about {
+        margin: 4rem auto 0; /* 上部の余白を4remに変更 */
+    }
+
+    /* NEWS */
+    .cover-news {
+        background-image: url("../news/images/cover-news-l.png"); /* ニュースページのカバー画像を大きいサイズに変更 */
+    }
+    .news-contents {
+        display: flex; /* フレックスボックスレイアウトを使用 */
+        justify-content: space-between; /* 子要素を両端に配置 */
+    }
+    .post {
+        width: 60%; /* 記事エリアの幅を70%に設定
+                   %とpxの使い分け：
+                   % → 親要素に対する割合（レスポンシブ）
+                   px → 固定サイズ（画面サイズが変わっても同じサイズ）
+                   rem → ルート要素のフォントサイズに対する倍率 */
+    }
+    .sidebar {
+        width: 32%; /* サイドバーの幅を22%に設定 */
+    }
+    .sidebar .heading-medium {
+        line-height: 1; /* 行間を文字の1倍に設定 */
+        margin-bottom: 1rem; /* 下部に1remの余白を追加 */
+    }
+
+    /* MENU */
+    .cover-menu {
+        background-image: url("../news/images/cover-news-l.png"); /* メニューページのカバー画像を大きいサイズに変更 */
+    }
+    .grid {
+        gap: 3rem 2rem; /* 行間を3rem、列間を2remに変更 */
+        grid-template-columns: repeat(3, 1fr); /* 3列のグリッドに変更 */
+    }
+    .item img {
+        margin-bottom: .5rem; /* 下部に0.5remの余白を追加 */
+    }
+    .item p {
+        font-size: 1rem; /* フォントサイズを1rem（約16px）に変更 */
+    }
+
+    /* CONTACT */
+    .cover-contact {
+        background-image: url(../contact/images/cover-contact-l.webp); /* コンタクトページのカバー画像を大きいサイズに変更 */
+    }
+    .location {
+        display: flex; /* フレックスボックスレイアウトを使用 */
+        gap: 2rem; /* 子要素間に2remの間隔を設定 */
+    }
+    .location-info {
+        width: 32%; /* 店舗情報エリアの幅を32%に設定 */
+    }
+    .location-info .info th {
+        padding-left: 2rem; /* 左側の内側余白を2remに変更 */
+    }
+    .location-map {
+        width: 64%; /* 地図エリアの幅を64%に設定 */
+    }
+    .email {
+        margin-bottom: 4rem; /* 下部の余白を4remに変更 */
+    }
+    .sns {
+        display: flex; /* フレックスボックスレイアウトを使用 */
+        align-items: flex-start; /* 子要素を上端に揃える
+                                   align-itemsの値（縦方向の配置）：
+                                   flex-start → 上揃え
+                                   center → 中央揃え
+                                   flex-end → 下揃え
+                                   stretch → 高さを揃える（デフォルト） */
+        gap: 2rem; /* 子要素間に2remの間隔を設定 */
+        margin-bottom: 0; /* 下部の余白を0に設定 */
+    }
+    .sns-item {
+        flex: 1; /* 子要素を等幅に配置
+                    flexプロパティの意味：
+                    flex: 1 → flex-grow: 1（残りスペースを等分）
+                    flex: 2 → 他のflex: 1の要素の2倍の幅を取る
+                    flex: none → 幅を固定（伸縮しない） */
+    }
+
+    /* フッター */
+    .page-footer {
+        background-image: url(); /* フッターの背景画像を大きいサイズに変更 */
+        padding-top: 12rem; /* 上部の内側余白を12remに設定 */
+    }
+    .info th {
+        padding-left: 2.5rem; /* 左側の内側余白を2.5remに変更 */
+    }
+}
